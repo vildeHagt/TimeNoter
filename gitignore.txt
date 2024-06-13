@@ -1,0 +1,95 @@
+# Built application files
+*.apk
+*.ap_
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+# Local configuration file (e.g., of IDEs)
+*.iml
+.gradle/
+local.properties
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Proguard files
+proguard/
+
+# Log files
+*.log
+
+# OS-specific files (e.g., macOS thumbs.db)
+.DS_Store
+Thumbs.db
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/
+
+# Gradle cache
+.gradle/
+
+# C++ build products (if you use C++ in your project)
+build/
+
+# Kotlin
+*.kotlin_module
+
+# Crashlytics build tools
+crashlytics.properties
+
+# Android Profiling
+*.hprof
+
+# Android Virtual Device (AVD) folder
+*.avd/
+
+# lint build files
+lint/intermediates/
+
+# Facebook Stetho, a debug bridge for Android applications
+.stetho/
+
+# Room
+*.smdl
+
+# Realm object server
+*.ros
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Firebase/Sentry
+firebase/
+
+# Keystore files
+*.jks
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+
+# Google Services (e.g., APIs or Firebase)
+google-services.json
+
+# Visual Studio Code (VSCode) specific files
+.vscode/
+
+# Android build intermediates
+/build/
+/TimeNoterAndroid/build/intermediates/
+
+# macOS specific files
+.DS_Store

@@ -1,6 +1,7 @@
 package com.example.timenoter.android.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,8 +31,8 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
             Column(
                 modifier = Modifier
                     .padding(8.dp)
+                    .border(2.dp, TimeColors.MellowColors.SoftTeal)
                     .background(TimeColors.MellowColors.SoftTeal)
-                    .padding(16.dp)
             ) {
                 Text(
                     text = timeEntries[index].dayStamp,

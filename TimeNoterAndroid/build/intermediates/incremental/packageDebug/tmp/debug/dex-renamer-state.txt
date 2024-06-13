@@ -1,4 +1,4 @@
-#Thu Jun 13 12:59:07 CEST 2024
+#Thu Jun 13 13:07:34 CEST 2024
 base.0=/Users/vildehagtvedt/Documents/GitHub/TimeNoter/TimeNoterAndroid/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/vildehagtvedt/Documents/GitHub/TimeNoter/TimeNoterAndroid/build/intermediates/dex/debug/mergeLibDexDebug/10/classes.dex
 base.2=/Users/vildehagtvedt/Documents/GitHub/TimeNoter/TimeNoterAndroid/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
