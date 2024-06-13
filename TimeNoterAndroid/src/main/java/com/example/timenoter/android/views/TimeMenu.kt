@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -33,12 +36,13 @@ fun TimeMenu() {
     val timeList = (-120..120 step 10).toList()
     val appTitle = "TimeNoter"
     val timeEntries = listOf(
-        TimeEntry("12/05", "50"),
-        TimeEntry("13/06", "120"),
-        TimeEntry("24/06", "35"),
-        TimeEntry("24/06", "-60")
+        TimeEntry(1, "12/05", 50),
+        TimeEntry(2, "13/06", 120),
+        TimeEntry(3, "24/06", 35),
+        TimeEntry(4, "24/06", -60)
     )
     val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries)
+    val savedTime = remember { mutableStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -63,8 +67,8 @@ fun TimeMenu() {
             horizontalAlignment = Alignment.CenterHorizontally,
         )
         {
-            ScrollableField(timeList = timeList)
-            SaveButton()
+            ScrollableField(timeList = timeList) { savedTime.value = it}
+            SaveButton(savedTime.value)
         }
         Column(
             modifier = Modifier

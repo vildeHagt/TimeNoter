@@ -75,4 +75,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.runtime:runtime-rxjava2")
+    implementation("com.google.code.gson:gson:2.8.8")
 }

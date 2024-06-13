@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
 
 @Composable
-fun ScrollableField(timeList: List<Int>) {
+fun ScrollableField(timeList: List<Int>, visibleTime: (targetTime: Int) -> Unit) {
     val scrollState = rememberLazyListState()
 
     LaunchedEffect(timeList.size) {
@@ -43,6 +43,7 @@ fun ScrollableField(timeList: List<Int>) {
             val targetIndex =
                 if (firstVisibleItemOffset > 0) firstVisibleItem + 1 else firstVisibleItem
             scrollState.animateScrollToItem(targetIndex)
+            visibleTime(timeList[targetIndex])
         }
     }
 }
