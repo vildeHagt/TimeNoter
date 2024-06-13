@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.timenoter.android.data.model.TimeEntry
 import com.example.timenoter.android.theme.TimeColors
+import java.sql.Time
 
 @Composable
 fun TimeGrid(timeEntries: List<TimeEntry>) {
@@ -32,6 +33,8 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .border(2.dp, TimeColors.MellowColors.SoftBeige)
+            .background(TimeColors.MellowColors.SoftBeige)
     ) {
         items(timeEntries.size) { index ->
             Column(
