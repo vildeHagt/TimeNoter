@@ -5,6 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
@@ -16,7 +18,8 @@ fun TimerText(
     timeText: String,
     fontSize: TextUnit = 6.em,
     modifier: Modifier = Modifier.padding(10.dp),
-    textColor: Color = Color.Black
+    textColor: Color = Color.Black,
+    fontWeight: FontWeight = FontWeight.Normal
 ) {
     Text(
         modifier = modifier,
@@ -24,6 +27,7 @@ fun TimerText(
         textAlign = TextAlign.Center,
         fontSize = fontSize,
         overflow = TextOverflow.Visible,
-        color = textColor
+        color = textColor,
+        fontWeight = fontWeight
     )
 }

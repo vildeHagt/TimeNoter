@@ -1,22 +1,21 @@
 package com.example.timenoter.android.views
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.timenoter.android.components.SaveButton
-import com.example.timenoter.android.components.ScrollableButton
+import com.example.timenoter.android.components.ScrollableField
 import com.example.timenoter.android.components.TimeGrid
 import com.example.timenoter.android.components.TimerText
 import com.example.timenoter.android.data.model.TimeEntry
@@ -64,28 +63,30 @@ fun TimeMenu() {
             horizontalAlignment = Alignment.CenterHorizontally,
         )
         {
-            ScrollableButton(timeList = timeList)
+            ScrollableField(timeList = timeList)
             SaveButton()
         }
         Column(
             modifier = Modifier
-                .weight(1f)
+                .weight(1.15f)
                 .border(
-                    BorderStroke(1.dp, TimeColors.ModernColors.Blue),
+                    BorderStroke(3.dp, TimeColors.ModernColors.Blue),
                     RoundedCornerShape(5.dp)
                 )
                 .padding(18.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TimerText(
-                modifier = Modifier.padding(3.dp),
+                modifier = Modifier.padding(6.dp),
                 timeText = "TOTAL TIME",
                 textColor = TimeColors.ModernColors.Blue,
+                fontWeight = FontWeight.SemiBold
             )
             TimerText(
                 modifier = Modifier.padding(3.dp),
                 timeText = "$roundedHours hours and $remainingMinutes minutes",
-                textColor = TimeColors.ModernColors.Blue
+                textColor = TimeColors.ModernColors.Blue,
+                fontWeight = FontWeight.SemiBold
             )
             TimeGrid(timeEntries)
         }

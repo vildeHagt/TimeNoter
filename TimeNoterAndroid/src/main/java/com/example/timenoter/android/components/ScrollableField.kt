@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
 
 @Composable
-fun ScrollableButton(timeList: List<Int>) {
+fun ScrollableField(timeList: List<Int>) {
     val scrollState = rememberLazyListState()
 
     LaunchedEffect(timeList.size) {
@@ -25,7 +25,7 @@ fun ScrollableButton(timeList: List<Int>) {
 
     LazyColumn(
         modifier = Modifier
-            .border(4.dp, TimeColors.ModernColors.Blue, shape = RoundedCornerShape(20.dp))
+            .border(3.dp, TimeColors.ModernColors.Blue, shape = RoundedCornerShape(20.dp))
             .width(200.dp)
             .height(60.dp),
         state = scrollState,

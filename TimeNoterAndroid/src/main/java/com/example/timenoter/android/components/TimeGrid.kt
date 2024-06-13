@@ -41,7 +41,6 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
         modifier = Modifier
             .padding(6.dp)
             .fillMaxSize()
-            .border(BorderStroke(2.dp, TimeColors.MellowColors.SoftBeige), RoundedCornerShape(5.dp))
             .background(TimeColors.MellowColors.SoftBeige)
     ) {
         items(timeEntries.size) { index ->
