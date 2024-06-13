@@ -1,2 +1,6 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.kt linguist-language=Kotlin
+*.kts linguist-language=Kotlin
+*.java linguist-language=Java
+*.swift linguist-language=Swift
+*.cpp linguist-language=C++
+*.h linguist-language=C
