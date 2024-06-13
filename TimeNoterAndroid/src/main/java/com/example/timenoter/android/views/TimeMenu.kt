@@ -11,6 +11,7 @@ import com.example.timenoter.android.components.ScrollableButton
 import com.example.timenoter.android.components.TimeGrid
 import com.example.timenoter.android.components.TimerText
 import com.example.timenoter.android.data.model.TimeEntry
+import com.example.timenoter.android.data.model.TimeProcessor.getTotalAccumulatedTime
 
 @Preview
 @Composable
@@ -27,7 +28,7 @@ fun TimeMenu() {
         TimeEntry("13/06", "120"),
         TimeEntry("24/06", "35"),
     )
-    val totalAccumulatedTime = timeEntries.sumOf { it.accumulatedTime.toInt() }
+    val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,7 +42,7 @@ fun TimeMenu() {
             SaveButton()
         }
         Column {
-            TimerText("Total accumulated time: $totalAccumulatedTime")
+            TimerText("Total accumulated time: $roundedHours hours and $remainingMinutes minutes")
             TimeGrid(timeEntries)
         }
     }

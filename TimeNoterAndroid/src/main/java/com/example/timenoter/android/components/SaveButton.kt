@@ -26,6 +26,6 @@ fun SaveButton() {
         colors = ButtonDefaults.buttonColors(containerColor = TimeColors.ModernColors.Blue),
         onClick = {  }
     ) {
-        TimerText(timeText = "LAGRE", fontSize = 6.em, textColor = TimeColors.MellowColors.SoftBlue)
+        TimerText(timeText = "SAVE", fontSize = 6.em, textColor = TimeColors.MellowColors.SoftBlue)
     }
 }

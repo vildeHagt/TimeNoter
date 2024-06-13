@@ -32,7 +32,7 @@ fun ScrollableButton(timeList: List<Int>) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(timeList.size) { index ->
-            TimerText(timeList[index].toString() + " minutter", 6.em, Modifier.padding(16.dp))
+            TimerText(timeList[index].toString() + " minutes", 6.em, Modifier.padding(16.dp))
         }
     }
 
