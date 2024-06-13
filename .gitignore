@@ -89,6 +89,7 @@ google-services.json
 
 # Android build intermediates
 /build/
+/TimeNoterAndroid/build/intermediates/
 
 # macOS specific files
 .DS_Store
