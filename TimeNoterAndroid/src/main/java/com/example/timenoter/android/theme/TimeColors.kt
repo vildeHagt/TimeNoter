@@ -2,7 +2,7 @@ package com.example.timenoter.android.theme
 
 import androidx.compose.ui.graphics.Color
 
-class TimerColors {
+class TimeColors {
     object ModernColors {
         val BlueGray = Color(0xFF607D8B)
         val CoolGray = Color(0xFF8A9A9E)

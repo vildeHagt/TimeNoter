@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.timenoter.android.theme.TimerColors
+import com.example.timenoter.android.theme.TimeColors
 import com.example.timenoter.android.views.TimeMenu
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxSize().background(TimerColors.MellowColors.SoftBeige),
+                        modifier = Modifier.fillMaxSize().background(TimeColors.MellowColors.SoftBeige),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {

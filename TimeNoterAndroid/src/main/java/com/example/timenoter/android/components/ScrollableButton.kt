@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.example.timenoter.android.theme.TimerColors
+import com.example.timenoter.android.theme.TimeColors
 
 @Composable
 fun ScrollableButton(timeList: List<Int>) {
@@ -25,7 +25,7 @@ fun ScrollableButton(timeList: List<Int>) {
 
     LazyColumn(
         modifier = Modifier
-            .border(4.dp, TimerColors.ModernColors.Blue, shape = RoundedCornerShape(20.dp))
+            .border(4.dp, TimeColors.ModernColors.Blue, shape = RoundedCornerShape(20.dp))
             .width(200.dp)
             .height(60.dp),
         state = scrollState,

@@ -1,6 +1,5 @@
 package com.example.timenoter.android.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -10,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.example.timenoter.android.theme.TimerColors
+import com.example.timenoter.android.theme.TimeColors
 
 @Preview
 @Composable
@@ -24,9 +23,9 @@ fun SaveButton() {
         modifier = Modifier
             .padding(15.dp),
         shape = RoundedCornerShape(20.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = TimerColors.ModernColors.Blue),
+        colors = ButtonDefaults.buttonColors(containerColor = TimeColors.ModernColors.Blue),
         onClick = {  }
     ) {
-        TimerText(timeText = "LAGRE", fontSize = 6.em, textColor = TimerColors.MellowColors.SoftBlue)
+        TimerText(timeText = "LAGRE", fontSize = 6.em, textColor = TimeColors.MellowColors.SoftBlue)
     }
 }
