@@ -31,12 +31,13 @@ fun TimeMenuPreview() {
 
 @Composable
 fun TimeMenu() {
-    val timeList = (10..120 step 10).toList()
+    val timeList = (-120..120 step 10).toList()
     val appTitle = "TimeNoter"
     val timeEntries = listOf(
         TimeEntry("12/05", "50"),
         TimeEntry("13/06", "120"),
         TimeEntry("24/06", "35"),
+        TimeEntry("24/06", "-60")
     )
     val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries)
 
@@ -73,18 +74,18 @@ fun TimeMenu() {
                     BorderStroke(1.dp, TimeColors.ModernColors.Blue),
                     RoundedCornerShape(5.dp)
                 )
-                .background(TimeColors.ModernColors.Blue)
-                .padding(8.dp),
+                .padding(18.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TimerText(
-                "Total time:",
-                textColor = TimeColors.MellowColors.SoftBeige,
+                modifier = Modifier.padding(3.dp),
+                timeText = "TOTAL TIME",
+                textColor = TimeColors.ModernColors.Blue,
             )
             TimerText(
-                "$roundedHours hours and $remainingMinutes minutes",
-                fontSize = 8.em,
-                textColor = TimeColors.MellowColors.SoftBeige
+                modifier = Modifier.padding(3.dp),
+                timeText = "$roundedHours hours and $remainingMinutes minutes",
+                textColor = TimeColors.ModernColors.Blue
             )
             TimeGrid(timeEntries)
         }

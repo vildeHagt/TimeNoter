@@ -6,9 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -17,36 +15,51 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.timenoter.android.data.model.TimeEntry
 import com.example.timenoter.android.theme.TimeColors
-import java.sql.Time
+
+@Preview
+@Composable
+fun TimeGridPreview() {
+    val timeEntries = listOf(
+        TimeEntry("12/05", "50"),
+        TimeEntry("13/06", "120"),
+        TimeEntry("24/06", "35"),
+        TimeEntry("24/06", "-60")
+    )
+    TimeGrid(timeEntries)
+}
 
 @Composable
 fun TimeGrid(timeEntries: List<TimeEntry>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
         modifier = Modifier
+            .padding(6.dp)
             .fillMaxSize()
-            .padding(16.dp)
-            .border(2.dp, TimeColors.MellowColors.SoftBeige)
+            .border(BorderStroke(2.dp, TimeColors.MellowColors.SoftBeige), RoundedCornerShape(5.dp))
             .background(TimeColors.MellowColors.SoftBeige)
     ) {
         items(timeEntries.size) { index ->
+            val gridColor = if (timeEntries.get(index).accumulatedTime.toInt() > 0)
+                TimeColors.MellowColors.SoftGreen else TimeColors.MellowColors.SoftPink
+
             Column(
                 modifier = Modifier
                     .padding(4.dp)
                     .border(
                         BorderStroke(1.dp, TimeColors.ModernColors.Blue),
-                        RoundedCornerShape(20)
+                        RoundedCornerShape(5.dp)
                     )
+                    .background(gridColor, shape = RoundedCornerShape(5.dp))
             ) {
                 Row(
-                    modifier = Modifier.padding(18.dp)
+                    modifier = Modifier
+                        .padding(14.dp)
                         .fillMaxSize(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
@@ -56,9 +69,8 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
                         fontWeight = FontWeight.Bold,
                         color = TimeColors.DarkColors.DarkBlue
                     )
-
                     Text(
-                        text = timeEntries[index].accumulatedTime + " minutter",
+                        text = timeEntries[index].accumulatedTime + " minutes",
                         fontSize = 18.sp,
                         color = TimeColors.DarkColors.DarkBlue,
                         modifier = Modifier.padding(start = 18.dp)

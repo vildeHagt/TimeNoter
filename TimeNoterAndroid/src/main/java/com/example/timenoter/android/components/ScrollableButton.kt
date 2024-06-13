@@ -20,7 +20,7 @@ fun ScrollableButton(timeList: List<Int>) {
     val scrollState = rememberLazyListState()
 
     LaunchedEffect(timeList.size) {
-        scrollState.scrollToItem(0)
+        scrollState.scrollToItem(timeList.size/2)
     }
 
     LazyColumn(
