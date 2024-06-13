@@ -1,12 +1,14 @@
 package com.example.timenoter.android.views
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +41,9 @@ fun TimeMenu() {
     val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries)
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(6.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ){
@@ -63,14 +67,24 @@ fun TimeMenu() {
             SaveButton()
         }
         Column(
-            modifier = Modifier.weight(1f).border(
-                BorderStroke(1.dp, TimeColors.ModernColors.Blue),
-                RoundedCornerShape(5)
-            ),
+            modifier = Modifier
+                .weight(1f)
+                .border(
+                    BorderStroke(1.dp, TimeColors.ModernColors.Blue),
+                    RoundedCornerShape(5.dp)
+                )
+                .background(TimeColors.ModernColors.Blue)
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TimerText(
-                "Total accumulated time: $roundedHours hours and $remainingMinutes minutes",
-                textColor = TimeColors.DarkColors.DarkBlue
+                "Total time:",
+                textColor = TimeColors.MellowColors.SoftBeige,
+            )
+            TimerText(
+                "$roundedHours hours and $remainingMinutes minutes",
+                fontSize = 8.em,
+                textColor = TimeColors.MellowColors.SoftBeige
             )
             TimeGrid(timeEntries)
         }
