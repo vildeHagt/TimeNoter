@@ -87,5 +87,8 @@ google-services.json
 # Visual Studio Code (VSCode) specific files
 .vscode/
 
+# Android build intermediates
+/build/
+
 # macOS specific files
 .DS_Store
