@@ -1,24 +1,91 @@
-# Compiled class file
+# Built application files
+*.apk
+*.ap_
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
 *.class
 
-# Log file
+# Generated files
+bin/
+gen/
+out/
+
+# Local configuration file (e.g., of IDEs)
+*.iml
+.gradle/
+local.properties
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Proguard files
+proguard/
+
+# Log files
 *.log
 
-# BlueJ files
-*.ctxt
+# OS-specific files (e.g., macOS thumbs.db)
+.DS_Store
+Thumbs.db
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Android Studio Navigation editor temp files
+.navigation/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Android Studio captures folder
+captures/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Gradle cache
+.gradle/
+
+# C++ build products (if you use C++ in your project)
+build/
+
+# Kotlin
+*.kotlin_module
+
+# Crashlytics build tools
+crashlytics.properties
+
+# Android Profiling
+*.hprof
+
+# Android Virtual Device (AVD) folder
+*.avd/
+
+# lint build files
+lint/intermediates/
+
+# Facebook Stetho, a debug bridge for Android applications
+.stetho/
+
+# Room
+*.smdl
+
+# Realm object server
+*.ros
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Firebase/Sentry
+firebase/
+
+# Keystore files
+*.jks
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+
+# Google Services (e.g., APIs or Firebase)
+google-services.json
+
+# Visual Studio Code (VSCode) specific files
+.vscode/
+
+# macOS specific files
+.DS_Store
