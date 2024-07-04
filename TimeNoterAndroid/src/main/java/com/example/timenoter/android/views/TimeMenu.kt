@@ -8,22 +8,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.timenoter.android.R
 import com.example.timenoter.android.components.SaveButton
 import com.example.timenoter.android.components.ScrollableField
 import com.example.timenoter.android.components.TimeGrid
 import com.example.timenoter.android.components.TimerText
-import com.example.timenoter.android.data.model.TimeEntry
 import com.example.timenoter.android.data.model.TimeProcessor.getTotalAccumulatedTime
 import com.example.timenoter.android.theme.TimeColors
+import com.example.timenoter.android.utils.TimeEntryUtils
 
 @Preview
 @Composable
@@ -34,15 +38,10 @@ fun TimeMenuPreview() {
 @Composable
 fun TimeMenu() {
     val timeList = (-120..120 step 10).toList()
-    val appTitle = "TimeNoter"
-    val timeEntries = listOf(
-        TimeEntry(1, "12/05", 50),
-        TimeEntry(2, "13/06", 120),
-        TimeEntry(3, "24/06", 35),
-        TimeEntry(4, "24/06", -60)
-    )
-    val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries)
-    val savedTime = remember { mutableStateOf(0) }
+    val context = LocalContext.current
+    val timeEntries = remember { mutableStateOf(TimeEntryUtils.getTimeEntries(context)) }
+    val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries.value)
+    val savedTime = remember { mutableIntStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -57,7 +56,7 @@ fun TimeMenu() {
                 .padding(10.dp),
         ) {
             TimerText(
-                timeText = appTitle,
+                timeText = stringResource(id = R.string.app_name),
                 fontSize = 10.em,
                 textColor = TimeColors.ModernColors.Blue
             )
@@ -67,8 +66,8 @@ fun TimeMenu() {
             horizontalAlignment = Alignment.CenterHorizontally,
         )
         {
-            ScrollableField(timeList = timeList) { savedTime.value = it}
-            SaveButton(savedTime.value)
+            ScrollableField(timeList = timeList) { savedTime.intValue = it}
+            SaveButton(savedTime.intValue) { timeEntries.value = TimeEntryUtils.getTimeEntries(context) }
         }
         Column(
             modifier = Modifier
@@ -92,7 +91,7 @@ fun TimeMenu() {
                 textColor = TimeColors.ModernColors.Blue,
                 fontWeight = FontWeight.SemiBold
             )
-            TimeGrid(timeEntries)
+            TimeGrid(timeEntries.value)
         }
     }
 }

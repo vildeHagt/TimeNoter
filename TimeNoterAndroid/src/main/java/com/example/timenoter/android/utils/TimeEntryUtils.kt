@@ -1,4 +1,4 @@
-package com.yourpackage.utils
+package com.example.timenoter.android.utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,7 +9,7 @@ import java.util.*
 
 object TimeEntryUtils {
 
-    fun saveTimeEntry(context: Context, timeEntry: TimeEntry) {
+    private fun saveTimeEntry(context: Context, timeEntry: TimeEntry) {
         val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
@@ -22,11 +22,20 @@ object TimeEntryUtils {
             gson.fromJson(json, type)
         }
 
-        timeEntryList.add(timeEntry)
+        val oldTimeEntry = existingTimeEntry(timeEntry, context)
+        if (oldTimeEntry != -1) {
+            if (timeEntry.accumulatedTime == 0) timeEntryList.removeAt(oldTimeEntry)
+            else timeEntryList[oldTimeEntry] = timeEntry
+        } else if (timeEntry.accumulatedTime != 0) timeEntryList.add(timeEntry)
 
         val updatedJson = gson.toJson(timeEntryList)
         editor.putString("time_entries", updatedJson)
         editor.apply()
+    }
+
+    private fun existingTimeEntry(timeEntry: TimeEntry, context: Context): Int {
+        val timeEntries = getTimeEntries(context)
+        return timeEntries.indexOfFirst { it.dayStamp == timeEntry.dayStamp }
     }
 
     fun onButtonPress(context: Context, timeToNote: Int) {

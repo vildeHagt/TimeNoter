@@ -44,7 +44,7 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
             .background(TimeColors.MellowColors.SoftBeige)
     ) {
         items(timeEntries.size) { index ->
-            val gridColor = if (timeEntries.get(index).accumulatedTime.toInt() > 0)
+            val gridColor = if (timeEntries[index].accumulatedTime > 0)
                 TimeColors.MellowColors.SoftGreen else TimeColors.MellowColors.SoftPink
 
             Column(

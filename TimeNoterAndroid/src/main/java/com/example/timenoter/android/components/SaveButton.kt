@@ -11,23 +11,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
-import com.yourpackage.utils.TimeEntryUtils
+import com.example.timenoter.android.utils.TimeEntryUtils
 
 @Preview
 @Composable
 fun SaveButtonPreview() {
-    SaveButton(30)
+    SaveButton(30) { }
 }
 
 @Composable
-fun SaveButton(timeToNote: Int) {
+fun SaveButton(timeToNote: Int, refreshGrid: () -> Unit) {
     val localContext = LocalContext.current
     Button(
         modifier = Modifier
             .padding(15.dp),
         shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(containerColor = TimeColors.ModernColors.Blue),
-        onClick = { TimeEntryUtils.onButtonPress(localContext, timeToNote) }
+        onClick = {
+            TimeEntryUtils.onButtonPress(localContext, timeToNote)
+            refreshGrid()
+        }
     ) {
         TimerText(timeText = "SAVE", fontSize = 6.em, textColor = TimeColors.MellowColors.SoftBlue)
     }
