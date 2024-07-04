@@ -26,8 +26,9 @@ object TimeEntryUtils {
 
         val oldTimeEntry = existingTimeEntry(timeEntry, context)
         if (oldTimeEntry != -1) {
-            if (timeEntry.accumulatedTime == 0) timeEntryList.removeAt(oldTimeEntry)
-            else timeEntryList[oldTimeEntry] = timeEntry
+            val difference = timeEntryList[oldTimeEntry].accumulatedTime + timeEntry.accumulatedTime
+            if (timeEntry.accumulatedTime == 0 || difference == 0) timeEntryList.removeAt(oldTimeEntry)
+            else timeEntryList[oldTimeEntry].accumulatedTime += timeEntry.accumulatedTime
         } else if (timeEntry.accumulatedTime != 0) timeEntryList.add(timeEntry)
 
         val updatedJson = gson.toJson(timeEntryList)
