@@ -5,9 +5,9 @@ import androidx.compose.ui.graphics.Color
 class TimeColors {
     object ModernColors {
         val BlueGray = Color(0xFF607D8B)
-        val CoolGray = Color(0xFF8A9A9E)
+        val Gray = Color(0xFF2E2E2E)
         val DeepPurple = Color(0xFF673AB7)
-        val Amber = Color(0xFFFFC107)
+        val Amber = Color(0xFFFFC526)
         val LightBlue = Color(0xFF03A9F4)
         val Lime = Color(0xFFCDDC39)
         val Pink = Color(0xFFE91E63)
@@ -46,6 +46,16 @@ class TimeColors {
         val DarkGray = Color(0xFF212121)
         val DarkCyan = Color(0xFF006064)
         val DarkTeal = Color(0xFF004D40)
-        val DarkYellow = Color(0xFFF57F17)
+        val DarkYellow = Color(0xFFFDB203)
+    }
+
+    object Basics {
+        val background = DarkColors.DarkGray
+        val backgroundShadow = ModernColors.Gray
+        val text = ModernColors.Amber
+        val buttonText = DarkColors.DarkGray
+        val buttonBackground = ModernColors.Amber
+        val borders = ModernColors.Amber
+        val icon = ModernColors.Amber
     }
 }

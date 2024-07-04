@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxSize().background(TimeColors.MellowColors.SoftBeige),
+                        modifier = Modifier.fillMaxSize().background(TimeColors.Basics.background),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {

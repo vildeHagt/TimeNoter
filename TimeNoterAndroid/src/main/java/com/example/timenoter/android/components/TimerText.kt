@@ -12,13 +12,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.timenoter.android.theme.TimeColors
 
 @Composable
 fun TimerText(
     timeText: String,
     fontSize: TextUnit = 6.em,
     modifier: Modifier = Modifier.padding(10.dp),
-    textColor: Color = Color.Black,
+    textColor: Color = TimeColors.Basics.text,
     fontWeight: FontWeight = FontWeight.Normal
 ) {
     Text(

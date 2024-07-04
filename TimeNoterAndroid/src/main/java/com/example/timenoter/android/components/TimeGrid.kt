@@ -41,20 +41,12 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
         modifier = Modifier
             .padding(6.dp)
             .fillMaxSize()
-            .background(TimeColors.MellowColors.SoftBeige)
     ) {
         items(timeEntries.size) { index ->
-            val gridColor = if (timeEntries[index].accumulatedTime > 0)
-                TimeColors.MellowColors.SoftGreen else TimeColors.MellowColors.SoftPink
-
             Column(
                 modifier = Modifier
                     .padding(4.dp)
-                    .border(
-                        BorderStroke(1.dp, TimeColors.ModernColors.Blue),
-                        RoundedCornerShape(5.dp)
-                    )
-                    .background(gridColor, shape = RoundedCornerShape(5.dp))
+                    .background(TimeColors.Basics.backgroundShadow, shape = RoundedCornerShape(16.dp))
             ) {
                 Row(
                     modifier = Modifier
@@ -66,12 +58,12 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
                         text = timeEntries[index].dayStamp,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TimeColors.DarkColors.DarkBlue
+                        color = TimeColors.Basics.text
                     )
                     Text(
                         text = timeEntries[index].accumulatedTime.toString() + " minutes",
                         fontSize = 18.sp,
-                        color = TimeColors.DarkColors.DarkBlue,
+                        color = TimeColors.Basics.text,
                         modifier = Modifier.padding(start = 18.dp)
                     )
                 }

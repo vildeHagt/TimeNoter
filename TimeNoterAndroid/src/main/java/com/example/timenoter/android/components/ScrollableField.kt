@@ -1,6 +1,7 @@
 package com.example.timenoter.android.components
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -23,9 +24,12 @@ fun ScrollableField(timeList: List<Int>, visibleTime: (targetTime: Int) -> Unit)
         scrollState.scrollToItem(timeList.size/2)
     }
 
+    Column(
+        modifier = Modifier
+            .background(color = TimeColors.Basics.backgroundShadow, shape = RoundedCornerShape(16.dp))
+    ) {
     LazyColumn(
         modifier = Modifier
-            .border(3.dp, TimeColors.ModernColors.Blue, shape = RoundedCornerShape(20.dp))
             .width(200.dp)
             .height(60.dp),
         state = scrollState,
@@ -45,5 +49,6 @@ fun ScrollableField(timeList: List<Int>, visibleTime: (targetTime: Int) -> Unit)
             scrollState.animateScrollToItem(targetIndex)
             visibleTime(timeList[targetIndex])
         }
+    }
     }
 }
