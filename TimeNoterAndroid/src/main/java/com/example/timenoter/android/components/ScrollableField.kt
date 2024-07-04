@@ -45,7 +45,7 @@ fun ScrollableField(timeList: List<Int>, visibleTime: (targetTime: Int) -> Unit)
             val firstVisibleItem = scrollState.firstVisibleItemIndex
             val firstVisibleItemOffset = scrollState.firstVisibleItemScrollOffset
             val targetIndex =
-                if (firstVisibleItemOffset > 0) firstVisibleItem + 1 else firstVisibleItem
+                if (firstVisibleItemOffset > 0 && timeList.size < firstVisibleItem + 1) firstVisibleItem + 1 else firstVisibleItem
             scrollState.animateScrollToItem(targetIndex)
             visibleTime(timeList[targetIndex])
         }

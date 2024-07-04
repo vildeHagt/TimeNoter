@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import com.example.timenoter.android.data.model.TimeEntry
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 import java.util.*
 
 object TimeEntryUtils {
@@ -56,6 +58,21 @@ object TimeEntryUtils {
             mutableListOf()
         } else {
             gson.fromJson(json, type)
+        }
+    }
+
+    fun exportTimeEntriesToJson(context: Context, timeEntries: List<TimeEntry>, fileName: String) {
+        val gson = Gson()
+        val json = gson.toJson(timeEntries)
+
+        try {
+            val fileOutputStream: FileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+            val outputStreamWriter = OutputStreamWriter(fileOutputStream)
+            outputStreamWriter.write(json)
+            outputStreamWriter.close()
+            fileOutputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

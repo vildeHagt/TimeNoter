@@ -46,4 +46,5 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
     implementation("com.google.code.gson:gson:2.8.8")
+    implementation("androidx.activity:activity-compose:1.9.0")
 }
