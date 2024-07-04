@@ -18,12 +18,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import com.example.timenoter.android.components.SaveButton
 import com.example.timenoter.android.components.ScrollableField
 import com.example.timenoter.android.components.ShareIcon
 import com.example.timenoter.android.components.TimeGrid
 import com.example.timenoter.android.components.TimerText
 import com.example.timenoter.android.data.model.TimeProcessor.getTotalAccumulatedTime
+import com.example.timenoter.android.theme.TimeColors
 import com.example.timenoter.android.utils.TimeEntryUtils
 
 @Preview
@@ -34,14 +36,13 @@ fun TimeMenuPreview() {
 
 @Composable
 fun TimeMenu() {
-    val timeList = (-120..120 step 10).toList()
+    val hoursList = (-8..8 step 1).toList()
+    val minutesList = (-60..60 step 10).toList()
     val context = LocalContext.current
     val timeEntries = remember { mutableStateOf(TimeEntryUtils.getTimeEntries(context)) }
-    val (roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries.value)
-    var savedTime by remember { mutableIntStateOf(0) }
-    val savedTimeText = if ((roundedHours + remainingMinutes) < 0) {
-        "You have $roundedHours hours and $remainingMinutes minutes available"
-    } else "You are $roundedHours hours and $remainingMinutes minutes behind"
+    val (roundedDays, roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries.value)
+    var savedTimeHours by remember { mutableIntStateOf(0) }
+    var savedTimeMinutes by remember { mutableIntStateOf(0) }
 
     Column(
         modifier = Modifier
@@ -62,8 +63,13 @@ fun TimeMenu() {
             horizontalAlignment = Alignment.CenterHorizontally,
         )
         {
-            ScrollableField(timeList = timeList) { savedTime = it}
-            SaveButton(savedTime) { timeEntries.value = TimeEntryUtils.getTimeEntries(context) }
+            Row {
+                ScrollableField(timeList = hoursList) { savedTimeHours = it }
+                TimerText(timeText = ":", fontWeight = FontWeight.ExtraBold)
+                ScrollableField(timeList = minutesList) { savedTimeMinutes = it }
+            }
+
+            SaveButton(savedTimeHours, savedTimeMinutes) { timeEntries.value = TimeEntryUtils.getTimeEntries(context) }
         }
         Column(
             modifier = Modifier
@@ -73,10 +79,21 @@ fun TimeMenu() {
         ) {
             TimerText(
                 modifier = Modifier.padding(3.dp),
-                timeText = if (roundedHours != 0 && remainingMinutes != 0) savedTimeText else "",
-                fontWeight = FontWeight.SemiBold
+                timeText = remainingTimeText(roundedDays, roundedHours, remainingMinutes),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 4.em,
             )
             TimeGrid(timeEntries.value)
         }
     }
+}
+
+private fun remainingTimeText(days: Int, hours: Int, minutes: Int): String {
+    val totalTime = days + hours + minutes
+    if (totalTime == 0) return ""
+    val daysText = if (days != 0) " $days workdays" else ""
+    val hoursText = if (hours != 0) " $hours hours" else ""
+    val minutesText = if (minutes != 0) " $minutes minutes" else ""
+
+    return if (totalTime > 0) "You have$daysText$hoursText$minutesText available" else "You are$daysText$hoursText$minutesText behind"
 }

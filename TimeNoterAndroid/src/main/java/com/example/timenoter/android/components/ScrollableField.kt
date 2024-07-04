@@ -30,13 +30,13 @@ fun ScrollableField(timeList: List<Int>, visibleTime: (targetTime: Int) -> Unit)
     ) {
     LazyColumn(
         modifier = Modifier
-            .width(200.dp)
+            .width(100.dp)
             .height(60.dp),
         state = scrollState,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(timeList.size) { index ->
-            TimerText(timeList[index].toString() + " minutes", 6.em, Modifier.padding(16.dp))
+            TimerText(timeList[index].toString(), 6.em, Modifier.padding(16.dp))
         }
     }
 

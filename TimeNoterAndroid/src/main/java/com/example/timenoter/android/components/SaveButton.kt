@@ -18,12 +18,14 @@ import com.example.timenoter.android.utils.TimeEntryUtils
 @Preview
 @Composable
 fun SaveButtonPreview() {
-    SaveButton(30) { }
+    SaveButton(30, 20) { }
 }
 
 @Composable
-fun SaveButton(timeToNote: Int, refreshGrid: () -> Unit) {
+fun SaveButton(hoursToNote: Int, minutesToNote: Int, refreshGrid: () -> Unit) {
     val localContext = LocalContext.current
+    val timeToNote = hoursToNote * 60 + minutesToNote
+
     Button(
         modifier = Modifier
             .padding(15.dp),
