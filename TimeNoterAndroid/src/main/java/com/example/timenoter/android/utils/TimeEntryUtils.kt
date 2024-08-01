@@ -24,12 +24,14 @@ object TimeEntryUtils {
             gson.fromJson(json, type)
         }
 
-        val oldTimeEntry = existingTimeEntry(timeEntry, context)
-        if (oldTimeEntry != -1) {
-            val difference = timeEntryList[oldTimeEntry].accumulatedTime + timeEntry.accumulatedTime
-            if (timeEntry.accumulatedTime == 0 || difference == 0) timeEntryList.removeAt(oldTimeEntry)
-            else timeEntryList[oldTimeEntry].accumulatedTime += timeEntry.accumulatedTime
-        } else if (timeEntry.accumulatedTime != 0) timeEntryList.add(timeEntry)
+        val existingTimeEntryIndex = existingTimeEntry(timeEntry, context)
+        if (timeEntry.accumulatedTime == 0) {
+            timeEntryList.removeAt(existingTimeEntryIndex)
+        } else if (existingTimeEntryIndex != -1) {
+            timeEntryList[existingTimeEntryIndex].accumulatedTime = timeEntry.accumulatedTime
+        } else {
+            timeEntryList.add(timeEntry)
+        }
 
         val updatedJson = gson.toJson(timeEntryList)
         editor.putString("time_entries", updatedJson)
