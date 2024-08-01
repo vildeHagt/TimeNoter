@@ -7,14 +7,10 @@ object TimeProcessor {
         var totalDays = 0
 
         timeEntries.forEach { timeEntry ->
-            totalDays += timeEntry.accumulatedTime / 1440
-            totalHours += timeEntry.accumulatedTime / 60
-            totalMinutes += timeEntry.accumulatedTime % 60
+            totalDays += timeEntry.accumulatedMinutes / 1440
+            totalHours += timeEntry.accumulatedHours
+            totalMinutes += timeEntry.accumulatedMinutes
         }
-
-        totalDays += totalHours / 8
-        totalHours += totalHours / 60 - (totalDays*8)
-        totalMinutes %= 60
 
         return SavedTime(totalDays, totalHours, totalMinutes)
     }

@@ -24,7 +24,6 @@ fun SaveButtonPreview() {
 @Composable
 fun SaveButton(hoursToNote: Int, minutesToNote: Int, refreshGrid: () -> Unit) {
     val localContext = LocalContext.current
-    val timeToNote = hoursToNote * 60 + minutesToNote
 
     Button(
         modifier = Modifier
@@ -32,7 +31,7 @@ fun SaveButton(hoursToNote: Int, minutesToNote: Int, refreshGrid: () -> Unit) {
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = TimeColors.Basics.buttonBackground),
         onClick = {
-            TimeEntryUtils.onButtonPress(localContext, timeToNote)
+            TimeEntryUtils.onButtonPress(localContext, hoursToNote, minutesToNote)
             refreshGrid()
         }
     ) {

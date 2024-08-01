@@ -25,17 +25,29 @@ object TimeEntryUtils {
         }
 
         val existingTimeEntryIndex = existingTimeEntry(timeEntry, context)
-        if (timeEntry.accumulatedTime == 0) {
-            timeEntryList.removeAt(existingTimeEntryIndex)
-        } else if (existingTimeEntryIndex != -1) {
-            timeEntryList[existingTimeEntryIndex].accumulatedTime = timeEntry.accumulatedTime
-        } else {
-            timeEntryList.add(timeEntry)
-        }
+        val newTimeEntryList = editTimeEntryList(timeEntry, existingTimeEntryIndex, timeEntryList)
 
-        val updatedJson = gson.toJson(timeEntryList)
+        val updatedJson = gson.toJson(newTimeEntryList)
         editor.putString("time_entries", updatedJson)
         editor.apply()
+    }
+
+    private fun editTimeEntryList(newTimeEntry: TimeEntry, existingTimeEntryIndex: Int, timeEntryList: MutableList<TimeEntry>): MutableList<TimeEntry> {
+        if (newTimeEntry.accumulatedHours < 0) {
+            newTimeEntry.accumulatedMinutes *= -1
+        }
+
+        if (existingTimeEntryIndex != -1) {
+            if (newTimeEntry.accumulatedHours == 0 && newTimeEntry.accumulatedMinutes == 0) {
+                timeEntryList.removeAt(existingTimeEntryIndex)
+            } else {
+                timeEntryList[existingTimeEntryIndex].accumulatedHours = newTimeEntry.accumulatedHours
+                timeEntryList[existingTimeEntryIndex].accumulatedMinutes = newTimeEntry.accumulatedMinutes
+            }
+        } else {
+            timeEntryList.add(newTimeEntry)
+        }
+        return timeEntryList
     }
 
     private fun existingTimeEntry(timeEntry: TimeEntry, context: Context): Int {
@@ -43,12 +55,16 @@ object TimeEntryUtils {
         return timeEntries.indexOfFirst { it.dayStamp == timeEntry.dayStamp }
     }
 
-    fun onButtonPress(context: Context, timeToNote: Int) {
+    fun onButtonPress(context: Context, hours: Int, minutes: Int) {
         val calendar = Calendar.getInstance()
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val newTimeEntry = TimeEntry(id = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE, dayStamp = "$day/$month", timeToNote)
+        val newTimeEntry = TimeEntry(
+            id = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE,
+            dayStamp = "$day/$month",
+            accumulatedHours = hours,
+            accumulatedMinutes = minutes)
         saveTimeEntry(context, newTimeEntry)
     }
 
