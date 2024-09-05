@@ -26,10 +26,10 @@ import com.example.timenoter.android.theme.TimeColors
 @Composable
 fun TimeGridPreview() {
     val timeEntries = listOf(
-        TimeEntry(1,"12/05",  0, 10),
-        TimeEntry(2, "13/06",  -1, 0),
+        TimeEntry(1,"12/05",  1, 0),
+        TimeEntry(2, "13/06",  -1, -20),
         TimeEntry(3, "24/06",  2, 10),
-        TimeEntry(4, "24/06",  0, 45)
+        TimeEntry(4, "24/06",  0, -45)
     )
     TimeGrid(timeEntries)
 }
@@ -44,29 +44,30 @@ fun TimeGrid(timeEntries: List<TimeEntry>) {
     ) {
         items(timeEntries.size) { index ->
             val hours = timeEntries[index].accumulatedHours
-            val minutes = timeEntries[index].accumulatedMinutes
+            var minutes = timeEntries[index].accumulatedMinutes
             val timeString = buildString {
                 if (hours != 0) {
                     append("$hours hours ")
                 }
                 if (minutes != 0) {
+                    if (hours != 0 && minutes < 0) minutes *= -1
                     append("$minutes minutes")
                 }
             }.trim()
 
             Column(
                 modifier = Modifier
-                    .padding(4.dp)
+                    .padding(5.dp)
                     .background(
                         TimeColors.Basics.backgroundShadow,
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(10.dp)
                     )
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(14.dp)
+                        .padding(15.dp)
                         .fillMaxSize(),
-                    horizontalArrangement = Arrangement.SpaceAround
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = timeEntries[index].dayStamp,
