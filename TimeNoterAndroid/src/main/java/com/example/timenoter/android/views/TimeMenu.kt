@@ -42,7 +42,7 @@ fun TimeMenuPreview() {
 @Composable
 fun TimeMenu() {
     val hoursList = (0..8 step 1).toList()
-    val minutesList = (0..60 step 10).toList()
+    val minutesList = (0..50 step 10).toList()
     val context = LocalContext.current
     val timeEntries = remember { mutableStateOf(TimeEntryUtils.getTimeEntries(context)) }
     val (roundedDays, roundedHours, remainingMinutes) = getTotalAccumulatedTime(timeEntries.value)
@@ -86,17 +86,12 @@ fun TimeMenu() {
                     valueToggle = if (valueToggle == "+") "-" else "+"
                 }
                 ScrollableField(
-                    timeList = hoursList,
-                    { savedTimeHours = it },
-                    isMinutesField = false
-                )
+                    timeList = hoursList
+                ) { savedTimeHours = it }
                 TimerText(timeText = ":", fontWeight = FontWeight.ExtraBold)
                 ScrollableField(
                     timeList = minutesList,
-                    { savedTimeMinutes = it },
-                    isMinutesField = true,
-                    isNegative = savedTimeHours < 0
-                )
+                ) { savedTimeMinutes = it }
                 NoterIcon(painterResource(id = R.drawable.save), {
                     TimeEntryUtils.onButtonPress(
                         context,

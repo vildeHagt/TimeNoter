@@ -20,13 +20,11 @@ import com.example.timenoter.android.theme.TimeColors
 fun ScrollableField(
     timeList: List<Int>,
     visibleTime: (targetTime: Int) -> Unit,
-    isMinutesField: Boolean,
-    isNegative: Boolean = false
 ) {
     val scrollState = rememberLazyListState()
 
     LaunchedEffect(timeList.size) {
-        scrollState.scrollToItem(timeList.size / 2)
+        scrollState.scrollToItem(0)
     }
 
     Column(
@@ -52,9 +50,7 @@ fun ScrollableField(
             if (!scrollState.isScrollInProgress) {
                 val firstVisibleItem = scrollState.firstVisibleItemIndex
                 val firstVisibleItemOffset = scrollState.firstVisibleItemScrollOffset
-                val targetIndex = if (!isMinutesField && isNegative) {
-                    firstVisibleItem + (timeList.size)/2 //-6 + 12 = 6. -3 + 6 = 3. -1 + 2
-                } else if (firstVisibleItemOffset > 0 && timeList.size < firstVisibleItem + 1) {
+                val targetIndex = if (firstVisibleItemOffset > 0 && timeList.size < firstVisibleItem + 1) {
                     firstVisibleItem + 1
                 } else {
                     firstVisibleItem

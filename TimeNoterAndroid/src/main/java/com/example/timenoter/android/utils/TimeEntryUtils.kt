@@ -33,10 +33,6 @@ object TimeEntryUtils {
     }
 
     private fun editTimeEntryList(newTimeEntry: TimeEntry, existingTimeEntryIndex: Int, timeEntryList: MutableList<TimeEntry>): MutableList<TimeEntry> {
-        if (newTimeEntry.accumulatedHours < 0) {
-            newTimeEntry.accumulatedMinutes *= -1
-        }
-
         if (existingTimeEntryIndex != -1) {
             if (newTimeEntry.accumulatedHours == 0 && newTimeEntry.accumulatedMinutes == 0) {
                 timeEntryList.removeAt(existingTimeEntryIndex)
