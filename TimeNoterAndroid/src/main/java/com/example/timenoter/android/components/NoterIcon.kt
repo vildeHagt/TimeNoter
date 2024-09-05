@@ -9,34 +9,36 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.timenoter.android.R
-import com.example.timenoter.android.data.model.TimeEntry
 import com.example.timenoter.android.theme.TimeColors
-import com.example.timenoter.android.utils.TimeEntryUtils.exportTimeEntriesToJson
 
 @Composable
-fun ShareIcon(timeEntries: List<TimeEntry>) {
-    val context = LocalContext.current
-
+fun NoterIcon(
+    icon: Painter,
+    onClick: () -> Unit,
+    horizontal: Arrangement.Horizontal = Arrangement.End,
+) {
     Row(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.End
+        horizontalArrangement = horizontal
     ) {
         Box {
             Icon(
-                painterResource(id = R.drawable.shareicon),
+                icon,
                 contentDescription = "Share time",
                 tint = TimeColors.Basics.icon,
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier
+                    .size(40.dp)
                     .clickable {
-                        exportTimeEntriesToJson(context, timeEntries, "TimeNoterFile")
-                }
+                        onClick()
+                    }
             )
         }
     }

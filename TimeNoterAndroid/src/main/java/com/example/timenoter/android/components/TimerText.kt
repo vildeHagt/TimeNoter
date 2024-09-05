@@ -29,6 +29,7 @@ fun TimerText(
         fontSize = fontSize,
         overflow = TextOverflow.Visible,
         color = textColor,
-        fontWeight = fontWeight
+        fontWeight = fontWeight,
+        maxLines = 1
     )
 }
