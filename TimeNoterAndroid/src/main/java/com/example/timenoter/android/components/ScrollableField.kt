@@ -36,7 +36,7 @@ fun ScrollableField(
     ) {
         LazyColumn(
             modifier = Modifier
-                .width(100.dp)
+                .width(90.dp)
                 .height(60.dp),
             state = scrollState,
             horizontalAlignment = Alignment.CenterHorizontally
