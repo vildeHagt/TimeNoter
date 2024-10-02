@@ -44,7 +44,7 @@ fun Button(
         TimerText(
             modifier = Modifier.padding(0.dp),
             timeText = title,
-            fontSize = 5.em,
+            fontSize = 7.em,
             textColor = buttonTextColor,
             fontWeight = FontWeight.Bold
         )

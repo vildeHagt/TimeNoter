@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,8 +81,8 @@ fun TimeMenu() {
                     modifier = Modifier
                         .padding(start = 15.dp, end = 15.dp),
                     valueToggle,
-                    if (valueToggle == "-") TimeColors.Basics.backgroundShadow else TimeColors.Basics.buttonBackground,
-                    if (valueToggle == "-") TimeColors.Basics.text else TimeColors.Basics.buttonText
+                    buttonColor = Color.Transparent,
+                    buttonTextColor = TimeColors.Basics.text
                 ) {
                     valueToggle = if (valueToggle == "+") "-" else "+"
                 }
@@ -92,7 +93,7 @@ fun TimeMenu() {
                 ScrollableField(
                     timeList = minutesList,
                 ) { savedTimeMinutes = it }
-                NoterIcon(painterResource(id = R.drawable.save), {
+                NoterIcon(painterResource(id = R.drawable.check_icon), {
                     TimeEntryUtils.onButtonPress(
                         context,
                         if (valueToggle == "-") savedTimeHours * -1 else savedTimeHours,
