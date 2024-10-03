@@ -5,4 +5,5 @@ data class TimeEntry(
     val dayStamp: String,
     var accumulatedHours: Int,
     var accumulatedMinutes: Int,
+    var note: String
 )

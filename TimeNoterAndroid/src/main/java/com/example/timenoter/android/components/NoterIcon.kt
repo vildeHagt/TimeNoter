@@ -19,12 +19,13 @@ import com.example.timenoter.android.theme.TimeColors
 
 @Composable
 fun NoterIcon(
+    modifier: Modifier = Modifier,
     icon: Painter,
     onClick: () -> Unit,
     horizontal: Arrangement.Horizontal = Arrangement.End,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(10.dp)
             .fillMaxWidth(),
         horizontalArrangement = horizontal

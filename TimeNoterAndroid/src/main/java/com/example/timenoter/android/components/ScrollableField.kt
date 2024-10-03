@@ -10,8 +10,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
@@ -22,6 +28,8 @@ fun ScrollableField(
     visibleTime: (targetTime: Int) -> Unit,
 ) {
     val scrollState = rememberLazyListState()
+    val density = LocalDensity.current
+    var itemHeightPx by remember { mutableStateOf(0) }
 
     LaunchedEffect(timeList.size) {
         scrollState.scrollToItem(0)
@@ -37,7 +45,10 @@ fun ScrollableField(
         LazyColumn(
             modifier = Modifier
                 .width(90.dp)
-                .height(60.dp),
+                .height(60.dp)
+                .onGloballyPositioned { coordinates ->
+                    itemHeightPx = coordinates.size.height
+                },
             state = scrollState,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -50,11 +61,14 @@ fun ScrollableField(
             if (!scrollState.isScrollInProgress) {
                 val firstVisibleItem = scrollState.firstVisibleItemIndex
                 val firstVisibleItemOffset = scrollState.firstVisibleItemScrollOffset
-                val targetIndex = if (firstVisibleItemOffset > 0 && timeList.size < firstVisibleItem + 1) {
+                val halfwayPoint = itemHeightPx / 2
+
+                val targetIndex = if (firstVisibleItemOffset > halfwayPoint) {
                     firstVisibleItem + 1
                 } else {
                     firstVisibleItem
                 }
+
                 scrollState.animateScrollToItem(targetIndex)
                 visibleTime(timeList[targetIndex])
             }

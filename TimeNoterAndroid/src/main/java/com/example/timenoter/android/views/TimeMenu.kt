@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -24,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.timenoter.android.R
-import com.example.timenoter.android.components.Button
+import com.example.timenoter.android.components.NoterButton
 import com.example.timenoter.android.components.ScrollableField
 import com.example.timenoter.android.components.NoterIcon
 import com.example.timenoter.android.components.TimeGrid
@@ -63,7 +61,7 @@ fun TimeMenu() {
                 .weight(1f)
                 .fillMaxWidth(),
         ) {
-            NoterIcon(painterResource(id = R.drawable.shareicon), {
+            NoterIcon(icon = painterResource(id = R.drawable.shareicon), onClick = {
                 exportTimeEntriesToJson(
                     context,
                     timeEntries.value,
@@ -77,7 +75,7 @@ fun TimeMenu() {
         )
         {
             Row {
-                Button(
+                NoterButton(
                     modifier = Modifier
                         .padding(start = 15.dp, end = 15.dp),
                     valueToggle,
@@ -93,14 +91,14 @@ fun TimeMenu() {
                 ScrollableField(
                     timeList = minutesList,
                 ) { savedTimeMinutes = it }
-                NoterIcon(painterResource(id = R.drawable.check_icon), {
+                NoterIcon(icon = painterResource(id = R.drawable.check_icon), onClick =  {
                     TimeEntryUtils.onButtonPress(
                         context,
                         if (valueToggle == "-") savedTimeHours * -1 else savedTimeHours,
                         if (valueToggle == "-") savedTimeMinutes * -1 else savedTimeMinutes
                     )
                     timeEntries.value = TimeEntryUtils.getTimeEntries(context)
-                }, Arrangement.Center)
+                }, horizontal = Arrangement.Center)
             }
 
         }
@@ -116,7 +114,7 @@ fun TimeMenu() {
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 4.em,
             )
-            TimeGrid(timeEntries.value)
+            TimeGrid(timeEntries.value) { TimeEntryUtils.saveTimeEntry(context, it) }
         }
     }
 }
@@ -125,8 +123,8 @@ private fun remainingTimeText(days: Int, hours: Int, minutes: Int): String {
     val totalTime = days + hours + minutes
     if (totalTime == 0) return ""
     val daysText = if (days != 0) " $days workdays" else ""
-    val hoursText = if (hours != 0) " $hours hours" else ""
-    val minutesText = if (minutes != 0) " $minutes minutes" else ""
+    val hoursText = if (hours != 0) " $hours" + "h" else ""
+    val minutesText = if (minutes != 0) " $minutes" + "min" else ""
 
     return if (totalTime > 0) "You have$daysText$hoursText$minutesText available" else "You are$daysText$hoursText$minutesText behind"
 }

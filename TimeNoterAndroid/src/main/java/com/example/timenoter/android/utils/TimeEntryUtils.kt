@@ -11,7 +11,7 @@ import java.util.*
 
 object TimeEntryUtils {
 
-    private fun saveTimeEntry(context: Context, timeEntry: TimeEntry) {
+    fun saveTimeEntry(context: Context, timeEntry: TimeEntry) {
         val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
@@ -60,7 +60,8 @@ object TimeEntryUtils {
             id = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE,
             dayStamp = "$day/$month",
             accumulatedHours = hours,
-            accumulatedMinutes = minutes)
+            accumulatedMinutes = minutes,
+            note = "")
         saveTimeEntry(context, newTimeEntry)
     }
 
