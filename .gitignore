@@ -16,7 +16,7 @@ out/
 # Local configuration file (e.g., of IDEs)
 *.iml
 .gradle/
-.idea/
+.idea/*
 
 # Proguard files
 proguard/
