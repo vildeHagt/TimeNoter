@@ -17,7 +17,7 @@ out/
 *.iml
 .gradle/
 local.properties
-*/.idea/
+.idea/*
 
 # Proguard files
 proguard/
