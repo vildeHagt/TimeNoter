@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("com.google.gms.google-services")
 }
 
 kotlin {
@@ -77,9 +76,4 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.runtime:runtime-rxjava2")
     implementation("com.google.code.gson:gson:2.8.8")
-
-    // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-    // When using the BoM, don't specify versions in Firebase dependencies
-    implementation("com.google.firebase:firebase-analytics")
 }

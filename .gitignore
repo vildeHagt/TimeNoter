@@ -81,7 +81,7 @@ firebase/
 .externalNativeBuild
 
 # Google Services (e.g., APIs or Firebase)
-google-services.json
+TimeNoterAndroid/google-services.json
 
 # Visual Studio Code (VSCode) specific files
 .vscode/
