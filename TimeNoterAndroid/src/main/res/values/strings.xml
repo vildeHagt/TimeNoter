@@ -3,4 +3,6 @@
     <string name="app_name">Time Noter</string>
     <string name="signInGoogle">Sign in with Google</string>
     <string name="signIn">Sign in</string>
+
+    <string name="web_client_id">640585141451-efqkmrfuc6va3cki8updc29f2d154spb.apps.googleusercontent.com</string>
 </resources>

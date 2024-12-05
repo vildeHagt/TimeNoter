@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.timenoter.android"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.example.timenoter.android"
         minSdk = 29
@@ -29,6 +29,13 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -45,6 +52,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     debugImplementation(libs.compose.ui.tooling)
     implementation("com.google.code.gson:gson:2.8.8")
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -58,4 +66,8 @@ dependencies {
 
     //Google Credentials
     implementation("androidx.credentials:credentials:1.5.0-beta01")
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-beta01")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.0.0")
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
 }

@@ -1,5 +1,6 @@
 package com.example.timenoter.android.views
 
+import android.webkit.WebSettings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.navigation.NavHostController
 import com.example.timenoter.android.R
 import com.example.timenoter.android.components.NoterButton
 import com.example.timenoter.android.components.ScrollableField
@@ -35,11 +37,13 @@ import com.example.timenoter.android.utils.TimeEntryUtils.exportTimeEntriesToJso
 @Preview
 @Composable
 fun TimeMenuPreview() {
-    TimeMenu()
+    val context = LocalContext.current
+    val navController = NavHostController(context)
+    TimeMenu(navController)
 }
 
 @Composable
-fun TimeMenu() {
+fun TimeMenu(navController: NavHostController) {
     val hoursList = (0..8 step 1).toList()
     val minutesList = (0..50 step 10).toList()
     val context = LocalContext.current
@@ -101,6 +105,10 @@ fun TimeMenu() {
                 }, horizontal = Arrangement.Center)
             }
 
+            var userAgent = WebSettings.getDefaultUserAgent(context)
+            println("Is Android client" + isAndroidClient(userAgent))
+            println("Useragent $userAgent")
+
         }
         Column(
             modifier = Modifier
@@ -127,4 +135,8 @@ private fun remainingTimeText(days: Int, hours: Int, minutes: Int): String {
     val minutesText = if (minutes != 0) " $minutes" + "min" else ""
 
     return if (totalTime > 0) "You have$daysText$hoursText$minutesText available" else "You are$daysText$hoursText$minutesText behind"
+}
+
+fun isAndroidClient(userAgent: String): Boolean {
+    return userAgent.contains("Dalvik") || userAgent.contains("okhttp")
 }

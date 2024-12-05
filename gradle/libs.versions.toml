@@ -9,6 +9,7 @@ runtimeAndroid = "1.6.7"
 runtimeDesktop = "1.6.7"
 foundationAndroid = "1.6.7"
 foundationDesktop = "1.6.7"
+navigationCompose = "2.8.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -21,6 +22,7 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 androidx-runtime-desktop = { group = "androidx.compose.runtime", name = "runtime-desktop", version.ref = "runtimeDesktop" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 androidx-foundation-desktop = { group = "androidx.compose.foundation", name = "foundation-desktop", version.ref = "foundationDesktop" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

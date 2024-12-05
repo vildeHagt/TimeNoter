@@ -4,17 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.timenoter.android.theme.TimeColors
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.timenoter.android.login.LoginScreen
 import com.example.timenoter.android.views.TimeMenu
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,28 +18,43 @@ class MainActivity : ComponentActivity() {
         setContent {
             enableEdgeToEdge()
 
-            MyApplicationTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize().background(TimeColors.Basics.background),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        TimeMenu()
-                    }
+            val navController = rememberNavController()
+            val startDestination = if (isLoggedIn()) "home" else "login"
+
+            NavHost(navController = navController, startDestination = startDestination) {
+                composable("login") {
+                    LoginScreen(navController)
+                }
+                composable("home") {
+                    TimeMenu(navController)
                 }
             }
+/*
+            if (!isLoggedIn()) {
+                LoginScreen()
+            } else {
+                MyApplicationTheme {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(TimeColors.Basics.background),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            TimeMenu()
+                        }
+                    }
+                }
+            }*/
         }
     }
 }
 
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        TimeMenu()
-    }
+fun isLoggedIn(): Boolean {
+    val firebaseUser = Firebase.auth.currentUser
+    return firebaseUser != null
 }
