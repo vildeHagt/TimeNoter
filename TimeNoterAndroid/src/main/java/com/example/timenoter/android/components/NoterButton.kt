@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
@@ -26,6 +27,7 @@ fun NoterButton(
     title: String,
     buttonColor: Color = TimeColors.Basics.buttonBackground,
     buttonTextColor: Color = TimeColors.Basics.buttonText,
+    fontSize: TextUnit = 7.em,
     onButtonPress: () -> Unit
 ) {
     Button(
@@ -37,10 +39,10 @@ fun NoterButton(
             onButtonPress()
         }
     ) {
-        TimerText(
+        NoterText(
             modifier = Modifier.padding(0.dp),
             timeText = title,
-            fontSize = 7.em,
+            fontSize = fontSize,
             textColor = buttonTextColor,
             fontWeight = FontWeight.Bold
         )

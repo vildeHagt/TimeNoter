@@ -53,7 +53,7 @@ fun ScrollableField(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(timeList.size) { index ->
-                TimerText(timeList[index].toString(), 6.em, Modifier.padding(16.dp))
+                NoterText(timeList[index].toString(), 6.em, Modifier.padding(16.dp))
             }
         }
 

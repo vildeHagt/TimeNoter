@@ -26,7 +26,7 @@ import com.example.timenoter.android.components.NoterButton
 import com.example.timenoter.android.components.ScrollableField
 import com.example.timenoter.android.components.NoterIcon
 import com.example.timenoter.android.components.TimeGrid
-import com.example.timenoter.android.components.TimerText
+import com.example.timenoter.android.components.NoterText
 import com.example.timenoter.android.data.model.TimeProcessor.getTotalAccumulatedTime
 import com.example.timenoter.android.theme.TimeColors
 import com.example.timenoter.android.utils.TimeEntryUtils
@@ -87,7 +87,7 @@ fun TimeMenu() {
                 ScrollableField(
                     timeList = hoursList
                 ) { savedTimeHours = it }
-                TimerText(timeText = ":", fontWeight = FontWeight.ExtraBold)
+                NoterText(timeText = ":", fontWeight = FontWeight.ExtraBold)
                 ScrollableField(
                     timeList = minutesList,
                 ) { savedTimeMinutes = it }
@@ -108,7 +108,7 @@ fun TimeMenu() {
                 .padding(18.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TimerText(
+            NoterText(
                 modifier = Modifier.padding(3.dp),
                 timeText = remainingTimeText(roundedDays, roundedHours, remainingMinutes),
                 fontWeight = FontWeight.SemiBold,

@@ -5,7 +5,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -15,7 +14,7 @@ import androidx.compose.ui.unit.em
 import com.example.timenoter.android.theme.TimeColors
 
 @Composable
-fun TimerText(
+fun NoterText(
     timeText: String,
     fontSize: TextUnit = 6.em,
     modifier: Modifier = Modifier.padding(10.dp),

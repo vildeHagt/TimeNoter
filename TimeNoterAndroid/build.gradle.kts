@@ -55,4 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //Google Credentials
+    implementation("androidx.credentials:credentials:1.5.0-beta01")
 }
