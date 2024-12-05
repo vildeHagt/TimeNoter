@@ -93,3 +93,4 @@ TimeNoterAndroid/google-services.json
 # macOS specific files
 .DS_Store
 .idea/other.xml
+/.idea
