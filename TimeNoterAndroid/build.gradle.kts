@@ -65,9 +65,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.2.0")
 
     //Google Credentials
-    implementation("androidx.credentials:credentials:1.5.0-beta01")
-    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-beta01")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.0.0")
+    implementation("androidx.credentials:credentials:1.5.0-rc01")
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
 }

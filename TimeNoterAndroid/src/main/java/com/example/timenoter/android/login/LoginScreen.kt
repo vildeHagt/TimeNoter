@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import androidx.navigation.NavHostController
 import com.example.timenoter.android.R
 import com.example.timenoter.android.components.NoterButton
 import com.example.timenoter.android.components.NoterText
+import com.example.timenoter.android.data.events.AuthState
 import com.example.timenoter.android.theme.TimeColors
 import com.example.timenoter.android.utils.GoogleSignInUtils
 import com.example.timenoter.android.viewModels.AuthViewModel
@@ -64,6 +66,10 @@ private fun SignInWithGoogleButton(navController: NavHostController) {
     val context = LocalContext.current
     val authViewModel = AuthViewModel()
     val googleSignInUtils = GoogleSignInUtils()
+    val authUiState = authViewModel.uiState.collectAsState().value
+    if (authUiState.authState == AuthState.Authenticated || authUiState.authState == AuthState.SignedIn) {
+        navController.navigate("home")
+    }
 
     LaunchedEffect(authViewModel) {
         authViewModel.onNavigationRequested = {

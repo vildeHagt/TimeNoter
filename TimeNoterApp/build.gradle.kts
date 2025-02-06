@@ -34,7 +34,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.timenoter"
+    namespace = "com.example.timenoter.android"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

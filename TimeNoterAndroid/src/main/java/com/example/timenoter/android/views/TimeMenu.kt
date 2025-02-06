@@ -104,12 +104,8 @@ fun TimeMenu(navController: NavHostController) {
                     timeEntries.value = TimeEntryUtils.getTimeEntries(context)
                 }, horizontal = Arrangement.Center)
             }
-
-            var userAgent = WebSettings.getDefaultUserAgent(context)
-            println("Is Android client" + isAndroidClient(userAgent))
-            println("Useragent $userAgent")
-
         }
+
         Column(
             modifier = Modifier
                 .weight(1.15f)
@@ -135,8 +131,4 @@ private fun remainingTimeText(days: Int, hours: Int, minutes: Int): String {
     val minutesText = if (minutes != 0) " $minutes" + "min" else ""
 
     return if (totalTime > 0) "You have$daysText$hoursText$minutesText available" else "You are$daysText$hoursText$minutesText behind"
-}
-
-fun isAndroidClient(userAgent: String): Boolean {
-    return userAgent.contains("Dalvik") || userAgent.contains("okhttp")
 }

@@ -10,7 +10,7 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.credentials.exceptions.NoCredentialException
 import com.example.timenoter.android.R
-import com.example.timenoter.android.data.events.AuthUIEvent
+import com.example.timenoter.android.login.AuthUIEvent
 import com.example.timenoter.android.viewModels.AuthViewModel
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import kotlinx.coroutines.CoroutineScope
@@ -37,17 +37,16 @@ class GoogleSignInUtils {
         coroutineScope.launch {
             try {
                 // 4. Pass this request to getCredential() (Kotlin)
-                // or getCredentialAsync() (Java) call to retrieve the user's available credentials.
-                //Note: If the user has not signed in with any google account on the device, a NoCredentialException will be thrown.
+                //Note: NoCredentialException will be thrown ff the user has not signed in with any google account on the device
                 val result = credentialManager.getCredential(
                     request = googleSignRequest,
                     context = context,
                 )
-                //5. Pass the response (GetCredentialResponse) to ViewModel to handle the authentication process.
+                //5. Pass the response (GetCredentialResponse) to ViewModel
                 authViewModel.onEvent(AuthUIEvent.HandleSignInResult(result))
             } catch (e: NoCredentialException) {
                 e.printStackTrace()
-                //6. This is a workaround for handling the NoCredentialException. Here, I handle it by lunching the intent for adding google account to the device.
+                //6. A workaround for handling the NoCredentialException by launching the intent for adding google account to the device.
                 // Once the account has been added to the device, recall doGoogleSignIn() method.
                 // if there is no credential, request to add google account
                 startAddAccountIntentLauncher?.launch(getAddGoogleAccountIntent())

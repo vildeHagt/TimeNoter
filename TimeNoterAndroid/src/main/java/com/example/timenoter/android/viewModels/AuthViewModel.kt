@@ -3,29 +3,18 @@ package com.example.timenoter.android.viewModels
 import android.util.Log
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialResponse
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.timenoter.android.data.events.AuthUIEvent
+import com.example.timenoter.android.data.events.AuthState
+import com.example.timenoter.android.data.events.AuthUiState
+import com.example.timenoter.android.login.AuthUIEvent
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class AuthViewModel: ViewModel() {
+class AuthViewModel: BaseViewModel<AuthUiState, AuthUIEvent>(AuthUiState()){
     var onNavigationRequested: (() -> Unit)? = null
-
-    fun onEvent(event: Any) {
-        when (event) {
-            is AuthUIEvent.HandleSignInResult -> {
-                viewModelScope.launch {
-                    handleSignIn(event.result)
-                }
-            }
-        }
-    }
 
     suspend fun handleSignIn(result: GetCredentialResponse) {
         //1. Once the API is successful, extract the CustomCredential
@@ -50,7 +39,15 @@ class AuthViewModel: ViewModel() {
 
                         //7. Go to TimeMenu screen
                         user?.run {
-                            onNavigationRequested?.invoke()
+                            updateUiState {
+                                AuthUiState(
+                                    alreadySignUp = true,
+                                    isLoading = false,
+                                    user = user,
+                                    isAuthenticated = true,
+                                    authState = AuthState.SignedIn
+                                )
+                            }
                         }
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e("TAG", "Received an invalid google id token response", e)
@@ -64,6 +61,15 @@ class AuthViewModel: ViewModel() {
                 // Catch any unrecognized credential type here.
                 Log.e("TAG", "Unexpected type of credential")
             }
+        }
+    }
+
+    override suspend fun handleEvent(event: AuthUIEvent) {
+        when (event) {
+            is AuthUIEvent.HandleSignInResult -> handleSignIn(event.result)
+            is AuthUIEvent.SignIn -> TODO()
+            AuthUIEvent.SignOut -> TODO()
+            is AuthUIEvent.SignUp -> TODO()
         }
     }
 }
