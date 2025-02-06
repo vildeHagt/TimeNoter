@@ -3,8 +3,8 @@ package com.example.timenoter.android.viewModels
 import android.util.Log
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialResponse
-import com.example.timenoter.android.data.events.AuthState
-import com.example.timenoter.android.data.events.AuthUiState
+import com.example.timenoter.android.login.AuthState
+import com.example.timenoter.android.login.AuthUiState
 import com.example.timenoter.android.login.AuthUIEvent
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -67,9 +67,6 @@ class AuthViewModel: BaseViewModel<AuthUiState, AuthUIEvent>(AuthUiState()){
     override suspend fun handleEvent(event: AuthUIEvent) {
         when (event) {
             is AuthUIEvent.HandleSignInResult -> handleSignIn(event.result)
-            is AuthUIEvent.SignIn -> TODO()
-            AuthUIEvent.SignOut -> TODO()
-            is AuthUIEvent.SignUp -> TODO()
         }
     }
 }

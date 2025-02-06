@@ -23,7 +23,6 @@ import androidx.navigation.NavHostController
 import com.example.timenoter.android.R
 import com.example.timenoter.android.components.NoterButton
 import com.example.timenoter.android.components.NoterText
-import com.example.timenoter.android.data.events.AuthState
 import com.example.timenoter.android.theme.TimeColors
 import com.example.timenoter.android.utils.GoogleSignInUtils
 import com.example.timenoter.android.viewModels.AuthViewModel
@@ -46,16 +45,6 @@ fun LoginScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        NoterButton(
-            title = stringResource(id = R.string.signIn),
-            modifier = Modifier.width(250.dp),
-            fontSize = 4.em
-        ) {
-            //Sign in with Email
-        }
-
-        NoterText("or", fontSize = 4.em )
-
         SignInWithGoogleButton(navController)
     }
 }
@@ -86,7 +75,7 @@ private fun SignInWithGoogleButton(navController: NavHostController) {
         }
 
     NoterButton(
-        title = stringResource(id = R.string.signInGoogle),
+        title = stringResource(id = R.string.signIn),
         modifier = Modifier.width(250.dp),
         fontSize = 4.em
     ) {

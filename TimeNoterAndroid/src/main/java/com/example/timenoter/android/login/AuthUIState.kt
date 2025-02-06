@@ -1,6 +1,5 @@
-package com.example.timenoter.android.data.events
+package com.example.timenoter.android.login
 
-import androidx.credentials.GetCredentialResponse
 import com.google.firebase.auth.FirebaseUser
 
 data class AuthUiState(
