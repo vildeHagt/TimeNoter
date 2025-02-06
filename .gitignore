@@ -17,7 +17,11 @@ out/
 *.iml
 .gradle/
 local.properties
+
+# Android Studio
 .idea/*
+!.idea/inspectionProfiles
+!.idea/codeStyles
 
 # Proguard files
 proguard/
@@ -92,5 +96,3 @@ TimeNoterAndroid/google-services.json
 
 # macOS specific files
 .DS_Store
-.idea/other.xml
-/.idea
